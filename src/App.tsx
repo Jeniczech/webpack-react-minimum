@@ -1,3 +1,7 @@
+import classes from './App.module.scss'
+
 export const App = () => (
-  <p>Hello, World!</p>
+  <div className={classes.app}>
+    <p className={classes.app__paragraph}>Hello, World!</p>
+  </div>
 );
