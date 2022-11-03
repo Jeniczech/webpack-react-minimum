@@ -1,7 +1,7 @@
 {
-  "name": "my-app",
+  "name": "webpack-react-minimum",
   "version": "1.0.0",
-  "description": "Starter pack",
+  "description": "Starter pack for react apps",
   "main": "index.js",
   "author": "Jan Čuma",
   "license": "UNLICENSED",
