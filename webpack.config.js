@@ -16,37 +16,53 @@ module.exports = {
     mode: isDevelopment ? 'development' : 'production',
     devtool: isDevelopment ? 'eval-source-map' : 'source-map',
     module: {
-        rules: [{
-            test: /\.(ts|tsx)$/,
-            exclude: /node_modules/,
-            use: [{
-                loader: 'babel-loader',
-                options: {
-                    presets: ['@babel/preset-env', ['@babel/preset-react', {
-                        runtime: 'automatic',
-                    }], '@babel/preset-typescript'],
-                    plugins: [isDevelopment && require('react-refresh/babel')].filter(Boolean),
-                },
-            }],
-        }, {
-            test: /\.s[ac]ss$/i,
-            use: ['style-loader', {
-                loader: 'css-loader',
-                options: {
-                    modules: true,
-                },
-            }, 'sass-loader'],
-        }, {
-            test: /\.(png|jpe?g|gif|svg)$/,
-            use: {
-                loader: 'file-loader',
-                options: {
-                    name: '[name].[hash].[ext]',
-                    outputPath: 'assets/images',
+        rules: [
+            {
+                test: /\.(ts|tsx)$/,
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                '@babel/preset-env',
+                                [
+                                    '@babel/preset-react',
+                                    {
+                                        runtime: 'automatic',
+                                    },
+                                ],
+                                '@babel/preset-typescript',
+                            ],
+                            plugins: [isDevelopment && require('react-refresh/babel')].filter(Boolean),
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
+                        },
+                    },
+                    'sass-loader',
+                ],
+            },
+            {
+                test: /\.(png|jpe?g|gif|svg)$/,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[hash].[ext]',
+                        outputPath: 'assets/images',
+                    },
                 },
             },
-        }],
-
+        ],
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
@@ -54,9 +70,11 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
-        publicPath: '/',
     },
-    plugins: [new HtmlWebpackPlugin({
-        template: './index.html',
-    }), isDevelopment && new ReactRefreshWebpackPlugin()].filter(Boolean),
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: './index.html',
+        }),
+        isDevelopment && new ReactRefreshWebpackPlugin(),
+    ].filter(Boolean),
 };
